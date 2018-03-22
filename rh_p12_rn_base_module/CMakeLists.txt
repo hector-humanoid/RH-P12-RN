@@ -110,7 +110,7 @@ find_package(catkin REQUIRED COMPONENTS
 catkin_package(
   INCLUDE_DIRS include
   LIBRARIES rh_p12_rn_base_module
-#  CATKIN_DEPENDS robotis_device robotis_math
+  CATKIN_DEPENDS rh_p12_rn_base_module_msgs
 #  DEPENDS system_lib
 )
 

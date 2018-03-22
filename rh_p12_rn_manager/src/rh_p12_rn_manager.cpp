@@ -86,7 +86,7 @@ int main(int argc, char **argv)
 
   // load offset
   if (g_offset_file != "")
-  controller->loadOffset(g_offset_file);
+  controller->loadOffsets(g_offset_file);
 
   usleep(300 * 1000);
 
