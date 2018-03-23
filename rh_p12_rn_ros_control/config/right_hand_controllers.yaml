@@ -1,0 +1,6 @@
+ - name: /johnny5/joints/right_hand_traj_controller
+   action_ns: follow_joint_trajectory
+   type: FollowJointTrajectory
+   default: true
+   joints:
+      - r_rh_p12_rn
