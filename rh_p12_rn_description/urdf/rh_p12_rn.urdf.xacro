@@ -1,17 +1,17 @@
 <?xml version="1.0"?>
 <robot name="rh_p12_rn" xmlns:xacro="http://ros.org/wiki/xacro">
 
-  <!-- some parameters -->
   <xacro:macro name="rh_p12_rn_macro" params="parent prefix reflect *origin">
 
-    <joint name="${prefix}_rh_p12_rn_joint" type="fixed">
+    <!-- Base Joint -->
+    <joint name="${prefix}_base_joint" type="fixed">
       <xacro:insert_block name="origin"/>
       <parent link="${parent}"/>
-      <child link="${prefix}_rh_p12_rn_base"/>
+      <child link="${prefix}_base"/>
     </joint>
 
-    <!-- base -->
-    <link name="${prefix}_rh_p12_rn_base">
+    <!-- Base -->
+    <link name="${prefix}_base">
       <collision>
         <origin xyz="0 0 0" rpy="0 0 0"/>
         <geometry>
@@ -35,25 +35,38 @@
       </inertial>
     </link>
 
-    <gazebo reference="${prefix}_rh_p12_rn_base">
+    <gazebo reference="${prefix}_base">
       <mu1>0.2</mu1>
       <mu2>0.2</mu2>
       <material>Gazebo/Grey</material>
     </gazebo>
+    
+    <!-- Finger Motor Joint -->
+    <joint name="${prefix}_finger_servo_joint" type="revolute">
+        <origin xyz="0 0.0 0" rpy="0 0 0" />
+        <axis xyz="1 0 0" />
+        <limit lower="0" upper="1.1" effort="4" velocity="5" />
+        <parent link="${prefix}_base" />
+        <child link="${prefix}_finger_servo_link" />
+    </joint>
+    
+    <link name="${prefix}_finger_servo_link">
+    </link>
 
-    <!-- Joint -->
-    <joint name="${prefix}_rh_p12_rn" type="revolute">
-      <parent link="${prefix}_rh_p12_rn_base"/>
-      <child link="${prefix}_rh_p12_rn_r1"/>
+    <!-- Right Joint 1-->
+    <joint name="${prefix}_joint_r1" type="revolute">
+      <parent link="${prefix}_base"/>
+      <child link="${prefix}_link_r1"/>
       <origin xyz="0.0 0.008 0.048" rpy="0 0 0"/>
       <axis xyz="1 0 0"/>
       <limit velocity="6.5" effort="1000" lower="0.0" upper="1.1" />
       <dynamics damping="0.7"/>
+      <mimic joint="${prefix}_finger_servo_joint" multiplier="1" offset="0"/>
     </joint>
 
-    <transmission name="${prefix}_tran_r1">
+    <transmission name="${prefix}_transmission_r1">
       <type>transmission_interface/SimpleTransmission</type>
-      <joint name="${prefix}_rh_p12_rn">
+      <joint name="${prefix}_join_r1">
         <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
       </joint>
       <actuator name="${prefix}_motor_r1">
@@ -62,8 +75,8 @@
       </actuator>
     </transmission>
 
-    <!-- rh_p12_rn_r1 -->
-    <link name="${prefix}_rh_p12_rn_r1">
+    <!-- Left Link 1 -->
+    <link name="${prefix}_link_r1">
       <collision>
         <origin xyz="0 0 0" rpy="0 0 0"/>
         <geometry>
@@ -87,25 +100,26 @@
       </inertial>
     </link>
 
-    <gazebo reference="${prefix}_rh_p12_rn_r1">
+    <gazebo reference="${prefix}_r1">
       <mu1>0.2</mu1>
       <mu2>0.2</mu2>
       <material>Gazebo/Grey</material>
     </gazebo>
 
     <!-- Right Joint 2 -->
-    <joint name="${prefix}_rh_r2" type="revolute">
-      <parent link="${prefix}_rh_p12_rn_r1"/>
-      <child link="${prefix}_rh_p12_rn_r2"/>
+    <joint name="${prefix}_joint_r2" type="revolute">
+      <parent link="${prefix}_link_r1"/>
+      <child link="${prefix}_link_r2"/>
       <origin xyz="0.0 0.0493634 0.0285" rpy="0 0 0"/>
       <axis xyz="-1 0 0"/>
       <limit velocity="6.5" effort="1000" lower="0.0" upper="1.0" />
       <dynamics damping="0.7"/>
+      <mimic joint="${prefix}_finger_servo_joint" multiplier="0.909" offset="0"/>s
     </joint>
 
-    <transmission name="${prefix}_tran_r2">
+    <transmission name="${prefix}_transmission_r2">
       <type>transmission_interface/SimpleTransmission</type>
-      <joint name="${prefix}_rh_r2">
+      <joint name="${prefix}_joint_r2">
         <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
       </joint>
       <actuator name="${prefix}_motor_r2">
@@ -114,8 +128,8 @@
       </actuator>
     </transmission>
 
-    <!-- rh_p12_rn_r2 -->
-    <link name="${prefix}_rh_p12_rn_r2">
+    <!-- Right Link 2 -->
+    <link name="${prefix}_link_r2">
       <collision>
         <origin xyz="0 0 0" rpy="0 0 0"/>
         <geometry>
@@ -139,25 +153,26 @@
       </inertial>
     </link>
 
-    <gazebo reference="${prefix}_rh_p12_rn_r2">
+    <gazebo reference="${prefix}_r2">
       <mu1>0.2</mu1>
       <mu2>0.2</mu2>
       <material>Gazebo/Grey</material>
     </gazebo>
 
     <!-- Left Joint 1 -->
-    <joint name="${prefix}_rh_l1" type="revolute">
-      <parent link="${prefix}_rh_p12_rn_base"/>
-      <child link="${prefix}_rh_p12_rn_l1"/>
+    <joint name="${prefix}_joint_l1" type="revolute">
+      <parent link="${prefix}_base"/>
+      <child link="${prefix}_link_l1"/>
       <origin xyz="0.0 -0.008 0.048" rpy="0 0 0"/>
       <axis xyz="-1 0 0"/>
       <limit velocity="6.5" effort="1000" lower="0.0" upper="1.1" />
       <dynamics damping="0.7"/>
+      <mimic joint="${prefix}_finger_servo_joint" multiplier="1" offset="0"/>
     </joint>
 
-    <transmission name="${prefix}_tran_l1">
+    <transmission name="${prefix}_transmission_l1">
       <type>transmission_interface/SimpleTransmission</type>
-      <joint name="${prefix}_rh_l1">
+      <joint name="${prefix}_joint_l1">
         <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
       </joint>
       <actuator name="${prefix}_motor_l1">
@@ -166,8 +181,8 @@
       </actuator>
     </transmission>
 
-    <!-- rh_p12_rn_l1 -->
-    <link name="${prefix}_rh_p12_rn_l1">
+    <!-- Left Link 1 -->
+    <link name="${prefix}_link_l1">
       <collision>
         <origin xyz="0 0 0" rpy="0 0 0"/>
         <geometry>
@@ -191,25 +206,26 @@
       </inertial>
     </link>
 
-    <gazebo reference="${prefix}_rh_p12_rn_l1">
+    <gazebo reference="${prefix}_link_l1">
       <mu1>0.2</mu1>
       <mu2>0.2</mu2>
       <material>Gazebo/Grey</material>
     </gazebo>
 
     <!-- Left Joint 2 -->
-    <joint name="${prefix}_rh_l2" type="revolute">
-      <parent link="${prefix}_rh_p12_rn_l1"/>
-      <child link="${prefix}_rh_p12_rn_l2"/>
+    <joint name="${prefix}_joint_l2" type="revolute">
+      <parent link="${prefix}_link_l1"/>
+      <child link="${prefix}_link_l2"/>
       <origin xyz="0.0 -0.0493634 0.0285" rpy="0 0 0"/>
       <axis xyz="1 0 0"/>
       <limit velocity="6.5" effort="1000" lower="0.0" upper="1.0" />
       <dynamics damping="0.7"/>
+      <mimic joint="${prefix}_finger_servo_joint" multiplier="0.909" offset="0"/>
     </joint>
 
-    <transmission name="${prefix}_tran_l2">
+    <transmission name="${prefix}_transmission_l2">
       <type>transmission_interface/SimpleTransmission</type>
-      <joint name="${prefix}_rh_l2">
+      <joint name="${prefix}_joint_l2">
         <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
       </joint>
       <actuator name="${prefix}_motor_l2">
@@ -218,8 +234,8 @@
       </actuator>
     </transmission>
 
-    <!-- rh_p12_rn_l2 -->
-    <link name="${prefix}_rh_p12_rn_l2">
+    <!-- Left Link 2 -->
+    <link name="${prefix}_link_l2">
       <collision>
         <origin xyz="0 0 0" rpy="0 0 0"/>
         <geometry>
@@ -243,7 +259,7 @@
       </inertial>
     </link>
 
-    <gazebo reference="${prefix}_rh_p12_rn_l2">
+    <gazebo reference="${prefix}_link_l2">
       <mu1>0.2</mu1>
       <mu2>0.2</mu2>
       <material>Gazebo/Grey</material>
