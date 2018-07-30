@@ -42,15 +42,26 @@
     </gazebo>
     
     <!-- Finger Motor Joint -->
-    <joint name="${prefix}_finger_servo_joint" type="revolute">
+    <joint name="${prefix}_servo_joint" type="revolute">
         <origin xyz="0 0.0 0" rpy="0 0 0" />
         <axis xyz="1 0 0" />
-        <limit lower="0" upper="1.1" effort="4" velocity="5" />
+        <limit lower="0" upper="1.15" effort="4" velocity="5" />
         <parent link="${prefix}_base" />
-        <child link="${prefix}_finger_servo_link" />
+        <child link="${prefix}_servo_link" />
     </joint>
     
-    <link name="${prefix}_finger_servo_link">
+    <transmission name="${prefix}_servo_joint_transmission">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="${prefix}_servo_joint">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      </joint>
+      <actuator name="${prefix}_servo_joint_motor">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+    </transmission>
+    
+    <link name="${prefix}_servo_link">
     </link>
 
     <!-- Right Joint 1-->
@@ -61,19 +72,31 @@
       <axis xyz="1 0 0"/>
       <limit velocity="6.5" effort="1000" lower="0.0" upper="1.1" />
       <dynamics damping="0.7"/>
-      <mimic joint="${prefix}_finger_servo_joint" multiplier="1" offset="0"/>
+      <mimic joint="${prefix}_servo_joint" multiplier="1" offset="0"/>
     </joint>
+    
+    <gazebo>
+      <plugin name="mimic_${prefix}_joint_r1" filename="libroboticsgroup_gazebo_mimic_joint_plugin.so">
+        <joint>${prefix}_servo_joint</joint>
+        <mimicJoint>${prefix}_joint_r1</mimicJoint>
+        <multiplier>1</multiplier>
+        <offset>0</offset>
+        <maxEffort>4</maxEffort>
+        <hasPID/>
+      </plugin>
+    </gazebo>
 
-    <transmission name="${prefix}_transmission_r1">
+
+<!--    <transmission name="${prefix}_transmission_r1">
       <type>transmission_interface/SimpleTransmission</type>
-      <joint name="${prefix}_join_r1">
+      <joint name="${prefix}_joint_r1">
         <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
       </joint>
       <actuator name="${prefix}_motor_r1">
         <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
         <mechanicalReduction>1</mechanicalReduction>
       </actuator>
-    </transmission>
+    </transmission>-->
 
     <!-- Left Link 1 -->
     <link name="${prefix}_link_r1">
@@ -114,10 +137,21 @@
       <axis xyz="-1 0 0"/>
       <limit velocity="6.5" effort="1000" lower="0.0" upper="1.0" />
       <dynamics damping="0.7"/>
-      <mimic joint="${prefix}_finger_servo_joint" multiplier="0.909" offset="0"/>s
+      <mimic joint="${prefix}_servo_joint" multiplier="0.909" offset="0"/>s
     </joint>
+    
+    <gazebo>
+      <plugin name="mimic_${prefix}_joint_r2" filename="libroboticsgroup_gazebo_mimic_joint_plugin.so">
+        <joint>${prefix}_servo_joint</joint>
+        <mimicJoint>${prefix}_joint_r2</mimicJoint>
+        <multiplier>0.909</multiplier>
+        <offset>0</offset>
+        <maxEffort>4</maxEffort>
+        <hasPID/>
+      </plugin>
+    </gazebo>
 
-    <transmission name="${prefix}_transmission_r2">
+<!--    <transmission name="${prefix}_transmission_r2">
       <type>transmission_interface/SimpleTransmission</type>
       <joint name="${prefix}_joint_r2">
         <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
@@ -126,7 +160,7 @@
         <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
         <mechanicalReduction>1</mechanicalReduction>
       </actuator>
-    </transmission>
+    </transmission>-->
 
     <!-- Right Link 2 -->
     <link name="${prefix}_link_r2">
@@ -167,10 +201,21 @@
       <axis xyz="-1 0 0"/>
       <limit velocity="6.5" effort="1000" lower="0.0" upper="1.1" />
       <dynamics damping="0.7"/>
-      <mimic joint="${prefix}_finger_servo_joint" multiplier="1" offset="0"/>
+      <mimic joint="${prefix}_servo_joint" multiplier="1" offset="0"/>
     </joint>
-
-    <transmission name="${prefix}_transmission_l1">
+    
+    <gazebo>
+      <plugin name="mimic_${prefix}_joint_l1" filename="libroboticsgroup_gazebo_mimic_joint_plugin.so">
+        <joint>${prefix}_servo_joint</joint>
+        <mimicJoint>${prefix}_joint_l1</mimicJoint>
+        <multiplier>1</multiplier>
+        <offset>0</offset>
+        <maxEffort>4</maxEffort>
+        <hasPID/>
+      </plugin>
+    </gazebo>
+    
+<!--    <transmission name="${prefix}_transmission_l1">
       <type>transmission_interface/SimpleTransmission</type>
       <joint name="${prefix}_joint_l1">
         <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
@@ -179,7 +224,7 @@
         <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
         <mechanicalReduction>1</mechanicalReduction>
       </actuator>
-    </transmission>
+    </transmission>-->
 
     <!-- Left Link 1 -->
     <link name="${prefix}_link_l1">
@@ -220,10 +265,21 @@
       <axis xyz="1 0 0"/>
       <limit velocity="6.5" effort="1000" lower="0.0" upper="1.0" />
       <dynamics damping="0.7"/>
-      <mimic joint="${prefix}_finger_servo_joint" multiplier="0.909" offset="0"/>
+      <mimic joint="${prefix}_servo_joint" multiplier="0.909" offset="0"/>
     </joint>
 
-    <transmission name="${prefix}_transmission_l2">
+    <gazebo>
+      <plugin name="mimic_${prefix}_joint_l2" filename="libroboticsgroup_gazebo_mimic_joint_plugin.so">
+        <joint>${prefix}_servo_joint</joint>
+        <mimicJoint>${prefix}_joint_l2</mimicJoint>
+        <multiplier>0.909</multiplier>
+        <offset>0</offset>
+        <maxEffort>4</maxEffort>
+        <hasPID/>
+      </plugin>
+    </gazebo>
+    
+<!--    <transmission name="${prefix}_transmission_l2">
       <type>transmission_interface/SimpleTransmission</type>
       <joint name="${prefix}_joint_l2">
         <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
@@ -232,7 +288,7 @@
         <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
         <mechanicalReduction>1</mechanicalReduction>
       </actuator>
-    </transmission>
+    </transmission>-->
 
     <!-- Left Link 2 -->
     <link name="${prefix}_link_l2">
@@ -264,6 +320,7 @@
       <mu2>0.2</mu2>
       <material>Gazebo/Grey</material>
     </gazebo>
+
 
   </xacro:macro>
 </robot>
