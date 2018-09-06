@@ -15,7 +15,7 @@
       <collision>
         <origin xyz="0 0 0" rpy="0 0 0"/>
         <geometry>
-          <mesh filename="package://rh_p12_rn_description/meshes/base.stl" scale="0.001 0.001 0.001"/>
+          <mesh filename="package://rh_p12_rn_description/meshes/base_convex.stl" scale="0.001 0.001 0.001"/>
         </geometry>
       </collision>
 
@@ -108,7 +108,7 @@
       <collision>
         <origin xyz="0 0 0" rpy="0 0 0"/>
         <geometry>
-          <mesh filename="package://rh_p12_rn_description/meshes/r1.stl" scale="0.001 0.001 0.001"/>
+          <mesh filename="package://rh_p12_rn_description/meshes/r1_convex.stl" scale="0.001 0.001 0.001"/>
         </geometry>
       </collision>
 
@@ -172,7 +172,7 @@
       <collision>
         <origin xyz="0 0 0" rpy="0 0 0"/>
         <geometry>
-          <mesh filename="package://rh_p12_rn_description/meshes/r2.stl" scale="0.001 0.001 0.001"/>
+          <mesh filename="package://rh_p12_rn_description/meshes/r2_convex.stl" scale="0.001 0.001 0.001"/>
         </geometry>
       </collision>
 
@@ -236,7 +236,7 @@
       <collision>
         <origin xyz="0 0 0" rpy="0 0 0"/>
         <geometry>
-          <mesh filename="package://rh_p12_rn_description/meshes/l1.stl" scale="0.001 0.001 0.001"/>
+          <mesh filename="package://rh_p12_rn_description/meshes/l1_convex.stl" scale="0.001 0.001 0.001"/>
         </geometry>
       </collision>
 
@@ -300,7 +300,7 @@
       <collision>
         <origin xyz="0 0 0" rpy="0 0 0"/>
         <geometry>
-          <mesh filename="package://rh_p12_rn_description/meshes/l2.stl" scale="0.001 0.001 0.001"/>
+          <mesh filename="package://rh_p12_rn_description/meshes/l2_convex.stl" scale="0.001 0.001 0.001"/>
         </geometry>
       </collision>
 
