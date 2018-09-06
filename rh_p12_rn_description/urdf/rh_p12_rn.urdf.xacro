@@ -128,7 +128,7 @@
       </inertial>
     </link>
 
-    <gazebo reference="${prefix}_r1">
+    <gazebo reference="${prefix}_link_r1">
       <mu1>0.2</mu1>
       <mu2>0.2</mu2>
       <material>Gazebo/Grey</material>
@@ -192,7 +192,7 @@
       </inertial>
     </link>
 
-    <gazebo reference="${prefix}_r2">
+    <gazebo reference="${prefix}_link_r2">
       <mu1>0.2</mu1>
       <mu2>0.2</mu2>
       <material>Gazebo/Grey</material>
