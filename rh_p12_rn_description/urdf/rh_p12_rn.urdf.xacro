@@ -2,6 +2,8 @@
 <robot name="rh_p12_rn" xmlns:xacro="http://ros.org/wiki/xacro">
 
   <xacro:macro name="rh_p12_rn_macro" params="parent prefix reflect *origin">
+    
+    <xacro:include filename="$(find hector_xacro_tools)/urdf/inertia_tensors.urdf.xacro" />
 
     <!-- Base Joint -->
     <joint name="${prefix}_base_joint" type="fixed">
@@ -27,12 +29,19 @@
         <material name="grey"/>
       </visual>
 
+      <!--
       <inertial>
         <origin xyz="0.000 0.000 0.032" rpy="0 0 0"/>
-        <mass value="0.236"/>
+        <mass value="0.236"/>-->
         <!--<inertia ixx="0.00017" ixy="0.0" ixz="0.0" iyy="0.00011" iyz="0.0" izz="0.00017" />-->
-        <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0" />
+       <!-- <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0" />
       </inertial>
+      -->
+      
+      <xacro:inertial_cuboid_with_pose mass="0.236" x_length="0.08" y_length="0.08" z_length="0.08" >
+            <origin xyz="0.000 0.000 0.032" rpy="0 0 0" />
+      </xacro:inertial_cuboid_with_pose>
+      
     </link>
 
     <gazebo reference="${prefix}_base">
@@ -62,11 +71,16 @@
     </transmission>
     
     <link name="${prefix}_servo_link">
-      <inertial>
+      <!--<inertial>
         <origin xyz="0 0 0" rpy="0 0 0" />
         <mass value="0.01" />
         <inertia ixx="1.0e-6" ixy="0.0" ixz="0.0" iyy="1.0e-6" iyz="0.0" izz="1.0e-6" />
       </inertial>
+      -->
+      <xacro:inertial_cuboid_with_pose mass="0.01" x_length="0.04" y_length="0.04" z_length="0.04" >
+        <origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
+      </xacro:inertial_cuboid_with_pose> 
+      
     </link>
 
     <!-- Right Joint 1-->
@@ -75,8 +89,8 @@
       <child link="${prefix}_link_r1"/>
       <origin xyz="0.0 0.008 0.048" rpy="0 0 0"/>
       <axis xyz="1 0 0"/>
-      <limit velocity="6.5" effort="1000" lower="0.0" upper="1.1" />
-      <dynamics damping="0.7"/>
+      <limit velocity="6.5" effort="10" lower="0.0" upper="1.1" />
+      <!--<dynamics damping="0.7"/>--> <!--WARNING: This makes Gazebo sim explode-->
       <mimic joint="${prefix}_servo_joint" multiplier="1" offset="0"/>
     </joint>
     
@@ -119,13 +133,19 @@
         </geometry>
         <material name="grey"/>
       </visual>
-
+      
+      <!--
       <inertial>
         <origin xyz="0.000 0.034 0.004" rpy="0 0 0"/>
-        <mass value="0.068"/>
+        <mass value="0.068"/>-->
         <!--<inertia ixx="0.00004" ixy="0.0" ixz="0.0" iyy="0.00002" iyz="-0.00001" izz="0.00002" />-->
-        <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0" />
+        <!--<inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0" />
       </inertial>
+      -->
+      
+      <xacro:inertial_cuboid_with_pose mass="0.068" x_length="0.04" y_length="0.04" z_length="0.04" >
+        <origin xyz="0.000 0.034 0.004" rpy="0 0 0" />
+      </xacro:inertial_cuboid_with_pose>      
     </link>
 
     <gazebo reference="${prefix}_link_r1">
@@ -140,8 +160,8 @@
       <child link="${prefix}_link_r2"/>
       <origin xyz="0.0 0.0493634 0.0285" rpy="0 0 0"/>
       <axis xyz="-1 0 0"/>
-      <limit velocity="6.5" effort="1000" lower="0.0" upper="1.0" />
-      <dynamics damping="0.7"/>
+      <limit velocity="6.5" effort="10" lower="0.0" upper="1.0" />
+      <!--<dynamics damping="0.7"/>--> <!--WARNING: This makes Gazebo sim explode-->
       <mimic joint="${prefix}_servo_joint" multiplier="0.909" offset="0"/>s
     </joint>
     
@@ -183,13 +203,18 @@
         </geometry>
         <material name="grey"/>
       </visual>
-
+      
+      <!--
       <inertial>
         <origin xyz="0.000 0.006 0.011" rpy="0 0 0"/>
-        <mass value="0.022"/>
+        <mass value="0.022"/>-->
         <!--<inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0.00001" iyz="0.0" izz="0.0" />-->
-        <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0" />
-      </inertial>
+      <!--<inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0" />
+      </inertial>-->
+      
+      <xacro:inertial_cuboid_with_pose mass="0.022" x_length="0.04" y_length="0.04" z_length="0.04" >
+        <origin xyz="0.000 0.006 0.011" rpy="0 0 0" />
+      </xacro:inertial_cuboid_with_pose> 
     </link>
 
     <gazebo reference="${prefix}_link_r2">
@@ -204,8 +229,8 @@
       <child link="${prefix}_link_l1"/>
       <origin xyz="0.0 -0.008 0.048" rpy="0 0 0"/>
       <axis xyz="-1 0 0"/>
-      <limit velocity="6.5" effort="1000" lower="0.0" upper="1.1" />
-      <dynamics damping="0.7"/>
+      <limit velocity="6.5" effort="10" lower="0.0" upper="1.1" />
+      <!--<dynamics damping="0.7"/>--> <!--WARNING: This makes Gazebo sim explode-->
       <mimic joint="${prefix}_servo_joint" multiplier="1" offset="0"/>
     </joint>
     
@@ -247,13 +272,17 @@
         </geometry>
         <material name="grey"/>
       </visual>
-
+      <!--
       <inertial>
         <origin xyz="0.000 -0.034 0.004" rpy="0 0 0"/>
-        <mass value="0.068"/>
+        <mass value="0.068"/>-->
         <!--<inertia ixx="0.00004" ixy="0.0" ixz="0.0" iyy="0.00002" iyz="0.00001" izz="0.00002" />-->
-        <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0" />
-      </inertial>
+        <!--<inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0" />
+      </inertial>-->
+      
+      <xacro:inertial_cuboid_with_pose mass="0.068" x_length="0.04" y_length="0.04" z_length="0.04" >
+        <origin xyz="0.000 -0.034 0.004" rpy="0 0 0" />
+      </xacro:inertial_cuboid_with_pose> 
     </link>
 
     <gazebo reference="${prefix}_link_l1">
@@ -268,8 +297,8 @@
       <child link="${prefix}_link_l2"/>
       <origin xyz="0.0 -0.0493634 0.0285" rpy="0 0 0"/>
       <axis xyz="1 0 0"/>
-      <limit velocity="6.5" effort="1000" lower="0.0" upper="1.0" />
-      <dynamics damping="0.7"/>
+      <limit velocity="6.5" effort="10" lower="0.0" upper="1.0" />
+      <!--<dynamics damping="0.7"/>--> <!--WARNING: This makes Gazebo sim explode-->s
       <mimic joint="${prefix}_servo_joint" multiplier="0.909" offset="0"/>
     </joint>
 
@@ -311,13 +340,18 @@
         </geometry>
         <material name="grey"/>
       </visual>
-
+      
+      <!--
       <inertial>
         <origin xyz="0.000 -0.006 0.011" rpy="0 0 0"/>
-        <mass value="0.022"/>
+        <mass value="0.022"/>-->
         <!--<inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0.00001" iyz="0.0" izz="0.0" />-->
-        <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0" />
-      </inertial>
+        <!--<inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0" />
+      </inertial>-->
+      
+      <xacro:inertial_cuboid_with_pose mass="0.022" x_length="0.04" y_length="0.04" z_length="0.04" >
+        <origin xyz="0.000 -0.006 0.011" rpy="0 0 0" />
+      </xacro:inertial_cuboid_with_pose> 
     </link>
 
     <gazebo reference="${prefix}_link_l2">
