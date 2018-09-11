@@ -117,7 +117,7 @@
       </actuator>
     </transmission>-->
 
-    <!-- Left Link 1 -->
+    <!-- Right Link 1 -->
     <link name="${prefix}_link_r1">
       <collision>
         <origin xyz="0 0 0" rpy="0 0 0"/>
