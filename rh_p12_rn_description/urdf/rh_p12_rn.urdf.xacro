@@ -158,8 +158,8 @@
     <joint name="${prefix}_joint_r2" type="revolute">
       <parent link="${prefix}_link_r1"/>
       <child link="${prefix}_link_r2"/>
-      <origin xyz="0.0 0.0493634 0.0285" rpy="0 0 0"/>
-      <axis xyz="-1 0 0"/>
+      <origin xyz="0.0 0.0493634 0.0285" rpy="0 0 ${M_PI}"/>
+      <axis xyz="1 0 0"/>
       <limit velocity="6.5" effort="10" lower="0.0" upper="1.0" />
       <!--<dynamics damping="0.7"/>--> <!--WARNING: This makes Gazebo sim explode-->
       <mimic joint="${prefix}_servo_joint" multiplier="0.909" offset="0"/>s
@@ -190,14 +190,14 @@
     <!-- Right Link 2 -->
     <link name="${prefix}_link_r2">
       <collision>
-        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <origin xyz="0 0 0" rpy="0 0 ${M_PI}"/>
         <geometry>
           <mesh filename="package://rh_p12_rn_description/meshes/r2_convex.stl" scale="0.001 0.001 0.001"/>
         </geometry>
       </collision>
 
       <visual>
-        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <origin xyz="0 0 0" rpy="0 0 ${M_PI}"/>
         <geometry>
           <mesh filename="package://rh_p12_rn_description/meshes/r2.stl" scale="0.001 0.001 0.001"/>
         </geometry>
@@ -213,7 +213,7 @@
       </inertial>-->
       
       <xacro:inertial_cuboid_with_pose mass="0.022" x_length="0.04" y_length="0.04" z_length="0.04" >
-        <origin xyz="0.000 0.006 0.011" rpy="0 0 0" />
+        <origin xyz="0.000 -0.006 0.011" rpy="0 0 0" />
       </xacro:inertial_cuboid_with_pose> 
     </link>
 
@@ -227,8 +227,8 @@
     <joint name="${prefix}_joint_l1" type="revolute">
       <parent link="${prefix}_base"/>
       <child link="${prefix}_link_l1"/>
-      <origin xyz="0.0 -0.008 0.048" rpy="0 0 0"/>
-      <axis xyz="-1 0 0"/>
+      <origin xyz="0.0 -0.008 0.048" rpy="0 0 ${M_PI}"/>
+      <axis xyz="1 0 0"/>
       <limit velocity="6.5" effort="10" lower="0.0" upper="1.1" />
       <!--<dynamics damping="0.7"/>--> <!--WARNING: This makes Gazebo sim explode-->
       <mimic joint="${prefix}_servo_joint" multiplier="1" offset="0"/>
@@ -259,14 +259,14 @@
     <!-- Left Link 1 -->
     <link name="${prefix}_link_l1">
       <collision>
-        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <origin xyz="0 0 0" rpy="0 0 ${M_PI}"/>
         <geometry>
           <mesh filename="package://rh_p12_rn_description/meshes/l1_convex.stl" scale="0.001 0.001 0.001"/>
         </geometry>
       </collision>
 
       <visual>
-        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <origin xyz="0 0 0" rpy="0 0 ${M_PI}"/>
         <geometry>
           <mesh filename="package://rh_p12_rn_description/meshes/l1.stl" scale="0.001 0.001 0.001"/>
         </geometry>
@@ -281,7 +281,7 @@
       </inertial>-->
       
       <xacro:inertial_cuboid_with_pose mass="0.068" x_length="0.04" y_length="0.04" z_length="0.04" >
-        <origin xyz="0.000 -0.034 0.004" rpy="0 0 0" />
+        <origin xyz="0.000 0.034 0.004" rpy="0 0 0" />
       </xacro:inertial_cuboid_with_pose> 
     </link>
 
@@ -295,7 +295,7 @@
     <joint name="${prefix}_joint_l2" type="revolute">
       <parent link="${prefix}_link_l1"/>
       <child link="${prefix}_link_l2"/>
-      <origin xyz="0.0 -0.0493634 0.0285" rpy="0 0 0"/>
+      <origin xyz="0.0 0.0493634 0.0285" rpy="0 0 ${M_PI}"/>
       <axis xyz="1 0 0"/>
       <limit velocity="6.5" effort="10" lower="0.0" upper="1.0" />
       <!--<dynamics damping="0.7"/>--> <!--WARNING: This makes Gazebo sim explode-->s
