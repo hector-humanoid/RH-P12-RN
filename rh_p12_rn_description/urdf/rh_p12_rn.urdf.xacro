@@ -105,18 +105,6 @@
       </plugin>
     </gazebo>
 
-
-<!--    <transmission name="${prefix}_transmission_r1">
-      <type>transmission_interface/SimpleTransmission</type>
-      <joint name="${prefix}_joint_r1">
-        <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
-      </joint>
-      <actuator name="${prefix}_motor_r1">
-        <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
-        <mechanicalReduction>1</mechanicalReduction>
-      </actuator>
-    </transmission>-->
-
     <!-- Right Link 1 -->
     <link name="${prefix}_link_r1">
       <collision>
@@ -176,17 +164,6 @@
       </plugin>
     </gazebo>
 
-<!--    <transmission name="${prefix}_transmission_r2">
-      <type>transmission_interface/SimpleTransmission</type>
-      <joint name="${prefix}_joint_r2">
-        <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
-      </joint>
-      <actuator name="${prefix}_motor_r2">
-        <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
-        <mechanicalReduction>1</mechanicalReduction>
-      </actuator>
-    </transmission>-->
-
     <!-- Right Link 2 -->
     <link name="${prefix}_link_r2">
       <collision>
@@ -244,17 +221,6 @@
         <hasPID/>
       </plugin>
     </gazebo>
-    
-<!--    <transmission name="${prefix}_transmission_l1">
-      <type>transmission_interface/SimpleTransmission</type>
-      <joint name="${prefix}_joint_l1">
-        <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
-      </joint>
-      <actuator name="${prefix}_motor_l1">
-        <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
-        <mechanicalReduction>1</mechanicalReduction>
-      </actuator>
-    </transmission>-->
 
     <!-- Left Link 1 -->
     <link name="${prefix}_link_l1">
@@ -312,17 +278,6 @@
         <hasPID/>
       </plugin>
     </gazebo>
-    
-<!--    <transmission name="${prefix}_transmission_l2">
-      <type>transmission_interface/SimpleTransmission</type>
-      <joint name="${prefix}_joint_l2">
-        <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
-      </joint>
-      <actuator name="${prefix}_motor_l2">
-        <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
-        <mechanicalReduction>1</mechanicalReduction>
-      </actuator>
-    </transmission>-->
 
     <!-- Left Link 2 -->
     <link name="${prefix}_link_l2">
