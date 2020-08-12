@@ -14,6 +14,6 @@
   <url type="bugtracker">https://github.com/ROBOTIS-GIT/RH-P12-RN/issues</url>
   <buildtool_depend>catkin</buildtool_depend>
 
-  <depend>hector_xacro_tools</depend>
+  <exec_depend>hector_xacro_tools</exec_depend>
 
 </package>
